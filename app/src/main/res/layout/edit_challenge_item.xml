@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="challenge"
+            type="com.example.challengetimer.database.Challenge" />
+
+        <variable
+            name="clickListener"
+            type="com.example.challengetimer.editlist.EditChallengeListener" />
+
+        <variable
+            name="deleteListener"
+            type="com.example.challengetimer.editlist.DeleteChallengeListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="8dp"
+        android:background="@drawable/light_background"
+        android:onClick="@{() -> clickListener.onClick(challenge)}">
+
+        <ImageView
+            android:id="@+id/rank_image"
+            challengeImage="@{challenge}"
+            challengeBackground="@{challenge}"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="8dp"
+            android:padding="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@drawable/rank_zero_pink_image" />
+
+        <TextView
+            android:id="@+id/name_string"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxWidth="128dp"
+            android:layout_marginHorizontal="16dp"
+            android:text="@{challenge.name}"
+            android:textAlignment="center"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textSize="@dimen/default_text_size"
+            app:layout_constraintBottom_toBottomOf="@+id/rank_image"
+            app:layout_constraintStart_toEndOf="@+id/rank_image"
+            app:layout_constraintTop_toTopOf="@+id/rank_image"
+            tools:text="Study" />
+
+        <ImageView
+            android:id="@+id/deleteFromListButton"
+            android:layout_width="@dimen/fragment_close_icon_size"
+            android:layout_height="@dimen/fragment_close_icon_size"
+            android:layout_marginEnd="24dp"
+            android:onClick="@{() -> deleteListener.onClick(challenge)}"
+            app:layout_constraintBottom_toBottomOf="@+id/name_string"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/name_string"
+            app:srcCompat="@drawable/close_image"
+            app:tint="@color/primaryTextColor" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

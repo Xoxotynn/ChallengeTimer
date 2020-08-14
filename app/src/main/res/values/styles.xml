@@ -1,0 +1,101 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
+        <item name="colorPrimaryVariant">@color/primaryLightColor</item>
+        <item name="colorOnPrimary">@color/primaryTextColor</item>
+        <item name="colorSecondary">@color/secondaryColor</item>
+        <item name="colorSecondaryVariant">@color/secondaryDarkColor</item>
+        <item name="colorOnSecondary">@color/secondaryTextColor</item>
+        <item name="colorOnSurface">@color/primaryLightColor</item>
+        <item name="fontFamily">@font/merienda_bold</item>
+        <item name="materialButtonStyle">@style/Widget.App.Button</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Widget.App.BottomAppBar" parent="Widget.MaterialComponents.BottomAppBar.Colored">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.BottomAppBar</item>
+    </style>
+
+    <style name="ThemeOverlay.App.BottomAppBar" parent="">
+        <item name="colorPrimary">#00000000</item>
+    </style>
+
+    <style name="Widget.App.FloatingActionButton" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="android:foreground">@drawable/home_button_image</item>
+        <item name="fabCustomSize">80dp</item>
+        <item name="android:backgroundTint">@color/transparentColor</item>
+        <item name="elevation">0dp</item>
+        <item name="android:elevation">0dp</item>
+        <item name="borderWidth">0dp</item>
+        <item name="pressedTranslationZ">0dp</item>
+    </style>
+
+    <style name="InnerListItem">
+        <item name="android:background">@drawable/inner_list_item_background</item>
+        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:layout_marginBottom">20dp</item>
+    </style>
+
+    <style name="DifficultyChip" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="checkedIconVisible">true</item>
+        <item name="rippleColor">#00000000</item>
+    </style>
+
+    <style name="ColorChip" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="rippleColor">#00000000</item>
+        <item name="chipStrokeColor">@color/primaryLightColor</item>
+        <item name="chipStrokeWidth">5dp</item>
+        <item name="android:layout_marginHorizontal">5dp</item>
+    </style>
+
+    <style name="Label">
+        <item name="android:background">@drawable/light_background</item>
+        <item name="android:paddingHorizontal">12dp</item>
+        <item name="android:paddingVertical">2dp</item>
+        <item name="android:textSize">@dimen/default_text_size</item>
+    </style>
+
+
+    <style name="CancelButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="materialThemeOverlay">@style/ThemeOverlayCancelButton</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.App.SmallComponent</item>
+    </style>
+
+    <style name="ThemeOverlayCancelButton">
+        <item name="colorPrimary">@color/primaryTextColor</item>
+        <item name="colorOnSurface">@color/primaryTextColor</item>
+        <item name="strokeWidth">3dp</item>
+    </style>
+
+
+    <style name="Widget.App.Button" parent="Widget.MaterialComponents.Button">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Button</item>
+        <item name="android:textAppearance">@style/TextAppearance.App.Button</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.App.SmallComponent</item>
+    </style>
+
+    <style name="ThemeOverlay.App.Button" parent="">
+        <item name="colorPrimary">@color/secondaryColor</item>
+        <item name="colorOnPrimary">#fff</item>
+    </style>
+
+    <style name="TextAppearance.App.Button" parent="TextAppearance.MaterialComponents.Button">
+        <item name="fontFamily">@font/roboto_bold</item>
+        <item name="android:fontFamily">@font/roboto_bold</item>
+    </style>
+
+    <style name="ShapeAppearance.App.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">18dp</item>
+    </style>
+
+</resources>

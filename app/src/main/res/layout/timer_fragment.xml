@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="timerViewModel"
+            type="com.example.challengetimer.timer.TimerViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/inner_layout_background">
+
+        <ImageView
+            android:id="@+id/closeButton"
+            android:layout_width="@dimen/fragment_close_icon_size"
+            android:layout_height="@dimen/fragment_close_icon_size"
+            android:layout_gravity="end"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginVertical="26dp"
+            android:onClick="@{() -> timerViewModel.onClose()}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/close_image_bold"
+            app:tint="@color/primaryTextColor" />
+
+        <ImageView
+            android:id="@+id/difficultyImage"
+            difficultyImage="@{timerViewModel.challenge}"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="end"
+            android:layout_marginHorizontal="32dp"
+            app:layout_constraintBottom_toBottomOf="@+id/closeButton"
+            app:layout_constraintStart_toEndOf="@+id/configButton"
+            app:layout_constraintTop_toTopOf="@+id/closeButton"
+            tools:src="@drawable/bruh_image" />
+
+        <ImageView
+            android:id="@+id/configButton"
+            android:layout_width="@dimen/delete_config_icon_size"
+            android:layout_height="@dimen/delete_config_icon_size"
+            android:layout_gravity="end"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginVertical="20dp"
+            android:onClick="@{() -> timerViewModel.onConfigChallenge()}"
+            app:layout_constraintBottom_toBottomOf="@+id/difficultyImage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/difficultyImage"
+            app:srcCompat="@drawable/edit_image"
+            app:tint="@color/primaryTextColor" />
+
+        <TextView
+            android:id="@+id/titleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{timerViewModel.challenge.name}"
+            android:textSize="@dimen/titles_text_size"
+            android:layout_marginBottom="32dp"
+            app:layout_constraintBottom_toTopOf="@+id/timerSeekBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="Study" />
+
+        <me.tankery.lib.circularseekbar.CircularSeekBar
+            android:id="@+id/timerSeekBar"
+            progressColor="@{timerViewModel.challenge}"
+            android:layout_width="256dp"
+            android:layout_height="256dp"
+            app:cs_circle_color="@color/primaryDarkColor"
+            app:cs_circle_stroke_width="16dp"
+            app:cs_disable_pointer="false"
+            app:cs_disable_progress_glow="true"
+            app:cs_max="23"
+            app:cs_move_outside_circle="true"
+            app:cs_pointer_color="@color/secondaryColor"
+            app:cs_pointer_halo_width="0dp"
+            app:cs_pointer_stroke_width="26dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.45" />
+
+        <ImageView
+            android:id="@+id/rankImage"
+            challengeImage="@{timerViewModel.challenge}"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:layout_constraintBottom_toBottomOf="@+id/timerSeekBar"
+            app:layout_constraintEnd_toEndOf="@+id/timerSeekBar"
+            app:layout_constraintStart_toStartOf="@+id/timerSeekBar"
+            app:layout_constraintTop_toTopOf="@+id/timerSeekBar"
+            app:layout_constraintVertical_bias="0.33"
+            tools:src="@drawable/rank_diamond_image" />
+
+        <TextView
+            android:id="@+id/remainingText"
+            android:layout_width="128dp"
+            android:layout_height="wrap_content"
+            remainingTimeText="@{timerViewModel.challenge}"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="@+id/timerSeekBar"
+            app:layout_constraintEnd_toEndOf="@+id/timerSeekBar"
+            app:layout_constraintStart_toStartOf="@+id/timerSeekBar"
+            app:layout_constraintTop_toBottomOf="@+id/rankImage"
+            app:layout_constraintVertical_bias="0.24" />
+
+        <TextView
+            android:id="@+id/currentTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{timerViewModel.currentTimeString}"
+            android:layout_marginTop="24dp"
+            android:textSize="32sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/timerSeekBar"
+            tools:text="120:00" />
+
+        <Button
+            android:id="@+id/startTimerButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start"
+            android:textSize="@dimen/default_text_size"
+            android:layout_marginBottom="48dp"
+            android:onClick="@{() -> timerViewModel.onStartTimer()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/currentTime"/>
+
+        <Button
+            android:id="@+id/cancelTimerButton"
+            style="@style/CancelButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="48dp"
+            android:text="Give up"
+            android:textSize="10sp"
+            android:visibility="gone"
+            android:onClick="@{() -> timerViewModel.onCancelTimer()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/currentTime" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

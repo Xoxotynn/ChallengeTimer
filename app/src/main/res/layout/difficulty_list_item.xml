@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="difficulty"
+            type="long" />
+
+        <variable
+            name="viewModel"
+            type="com.example.challengetimer.main.MainViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/outer_item_bg"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/inner_item_bg"
+            style="@style/InnerListItem"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/challenge_list"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="8dp"
+                android:paddingTop="24dp"
+                android:paddingBottom="42dp"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:spanCount="3" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/difficultyImage"
+            listDifficultyImage="@{difficulty}"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="30dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/bruh_image" />
+
+        <TextView
+            android:id="@+id/difficultyText"
+            style="@style/Label"
+            listDifficultyText="@{difficulty}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/difficultyImage"
+            app:layout_constraintStart_toEndOf="@+id/difficultyImage"
+            app:layout_constraintTop_toTopOf="@+id/difficultyImage" />
+
+        <ImageView
+            android:id="@+id/add_button"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:onClick="@{() -> viewModel.onConfigChallenge(difficulty)}"
+            android:padding="16dp"
+            android:background="@drawable/light_background"
+            android:src="@drawable/plus_image"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:tint="@color/primaryTextColor" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

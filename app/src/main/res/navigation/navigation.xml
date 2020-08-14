@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/navigation"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.challengetimer.main.MainFragment"
+        android:label="MainFragment" >
+        <action
+            android:id="@+id/action_mainFragment_to_configFragment"
+            app:destination="@id/configFragment"
+            app:enterAnim="@anim/slide_in_down"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out_down" />
+        <action
+            android:id="@+id/action_mainFragment_to_editListFragment"
+            app:destination="@id/editListFragment"
+            app:enterAnim="@anim/slide_in_down"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out_down" />
+        <action
+            android:id="@+id/action_mainFragment_to_timerFragment"
+            app:destination="@id/timerFragment"
+            app:enterAnim="@anim/slide_in_down"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out_down" />
+    </fragment>
+    <fragment
+        android:id="@+id/configFragment"
+        android:name="com.example.challengetimer.config.ConfigFragment"
+        android:label="ConfigFragment">
+        <action
+            android:id="@+id/action_configFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/slide_out_down"
+            app:popUpTo="@id/mainFragment" />
+        <argument
+            android:name="challengeId"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_configFragment_to_editListFragment"
+            app:destination="@id/editListFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/slide_out_down"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out_down"
+            app:popUpTo="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editListFragment"
+        android:name="com.example.challengetimer.editlist.EditListFragment"
+        android:label="EditListFragment" >
+        <action
+            android:id="@+id/action_editListFragment_to_configFragment"
+            app:destination="@id/configFragment"
+            app:enterAnim="@anim/slide_in_down"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out_down" />
+        <action
+            android:id="@+id/action_editListFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/slide_out_down"
+            app:popUpTo="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/timerFragment"
+        android:name="com.example.challengetimer.timer.TimerFragment"
+        android:label="TimerFragment" >
+        <argument
+            android:name="challengeId"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_timerFragment_to_configFragment"
+            app:destination="@id/configFragment"
+            app:enterAnim="@anim/slide_in_down"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out_down" />
+    </fragment>
+</navigation>

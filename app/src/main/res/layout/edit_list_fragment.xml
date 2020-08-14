@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="editListViewModel"
+            type="com.example.challengetimer.editlist.EditListViewModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/edit_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/inner_layout_background"
+        android:clipToPadding="false"
+        android:paddingBottom="100dp"
+        android:scrollbars="none">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/edit_background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".editlist.EditListFragment">
+
+            <ImageView
+                android:id="@+id/deleteFromListButton"
+                android:layout_width="@dimen/fragment_close_icon_size"
+                android:layout_height="@dimen/fragment_close_icon_size"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginVertical="24dp"
+                android:onClick="@{() -> editListViewModel.onCloseEditList()}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/close_image_bold"
+                app:tint="@color/primaryTextColor" />
+
+            <TextView
+                android:id="@+id/editTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="64dp"
+                android:text="Your challenges"
+                android:textSize="@dimen/titles_text_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/edit_challenge_list"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:paddingHorizontal="24dp"
+                android:paddingVertical="32dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/editTitle" />
+
+            <TextView
+                android:id="@+id/emptyTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="128dp"
+                android:text="You have no challenges"
+                android:textAlignment="center"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp"
+                android:textSize="@dimen/titles_text_size"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/create_first_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> editListViewModel.onConfigChallenge(0)}"
+                android:text="Create"
+                android:textSize="@dimen/default_text_size"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/emptyTitle" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>

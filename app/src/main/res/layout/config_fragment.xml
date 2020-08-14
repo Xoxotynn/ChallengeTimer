@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="configViewModel"
+            type="com.example.challengetimer.config.ConfigViewModel" />
+    </data>
+
+    <ScrollView
+        android:id="@+id/config_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/inner_layout_background"
+        android:clipToPadding="false"
+        android:paddingBottom="72dp"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="50dp">
+
+                <ImageView
+                    android:id="@+id/closeButton"
+                    android:layout_width="@dimen/fragment_close_icon_size"
+                    android:layout_height="@dimen/fragment_close_icon_size"
+                    android:layout_gravity="end"
+                    android:layout_marginHorizontal="24dp"
+                    android:layout_marginVertical="26dp"
+                    android:onClick="@{() -> configViewModel.onClose()}"
+                    app:tint="@color/primaryTextColor"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/close_image_bold" />
+
+                <ImageView
+                    android:id="@+id/resetButton"
+                    android:layout_width="@dimen/delete_config_icon_size"
+                    android:layout_height="@dimen/delete_config_icon_size"
+                    android:layout_gravity="end"
+                    android:layout_marginHorizontal="32dp"
+                    android:onClick="@{() -> configViewModel.onReset()}"
+                    app:layout_constraintBottom_toBottomOf="@+id/singleDeleteButton"
+                    app:layout_constraintStart_toEndOf="@id/singleDeleteButton"
+                    app:layout_constraintTop_toTopOf="@+id/singleDeleteButton"
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/reset_image"
+                    app:tint="@color/primaryTextColor" />
+
+                <ImageView
+                    android:id="@+id/singleDeleteButton"
+                    android:layout_width="@dimen/delete_config_icon_size"
+                    android:layout_height="@dimen/delete_config_icon_size"
+                    android:layout_gravity="end"
+                    android:layout_marginHorizontal="24dp"
+                    android:onClick="@{() -> configViewModel.onDelete()}"
+                    app:layout_constraintBottom_toBottomOf="@+id/closeButton"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/closeButton"
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/delete_image"
+                    app:tint="@color/primaryTextColor" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/outer_name_item_bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/inner_name_item_bg"
+                    style="@style/InnerListItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+                    <EditText
+                        android:id="@+id/editTextTextPersonName"
+                        android:background="@drawable/light_background"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="32dp"
+                        android:layout_marginTop="32dp"
+                        android:layout_marginBottom="24dp"
+                        android:ems="10"
+                        android:padding="8dp"
+                        android:inputType="textPersonName|textNoSuggestions"
+                        android:maxLength="12"
+                        android:textSize="@dimen/default_text_size"
+                        android:selectAllOnFocus="true"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/nameText"
+                    style="@style/Label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:text="Name"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/outer_difficulty_item_bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/inner_difficulty_item_bg"
+                    style="@style/InnerListItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/difficulty_list"
+                        checkedDifficulty="@{configViewModel.challenge}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="50dp"
+                        android:paddingVertical="35dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:singleSelection="true">
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/bruh_chip"
+                            style="@style/DifficultyChip"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:checkedIcon="@drawable/bruh_image"
+                            android:text="@string/test_label"
+                            tools:checked="true" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/easy_chip"
+                            style="@style/DifficultyChip"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:checkedIcon="@drawable/rank_zero_pink_image"
+                            android:text="@string/easy_label" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/medium_chip"
+                            style="@style/DifficultyChip"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:checkedIcon="@drawable/rank_zero_blue_image"
+                            android:text="@string/medium_label" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/hard_chip"
+                            style="@style/DifficultyChip"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:checkedIcon="@drawable/rank_zero_violet_image"
+                            android:text="@string/hard_label" />
+
+                    </com.google.android.material.chip.ChipGroup>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/difficultyText"
+                    style="@style/Label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:text="Difficulty"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/infoButton"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    app:srcCompat="@drawable/info_image"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/difficultyText"
+                    app:tint="@color/primaryTextColor" />
+
+                <TextView
+                    android:id="@+id/offText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="You can't change difficulty after creation"
+                    android:textAlignment="center"
+                    android:visibility="gone"
+                    android:textColor="#fff"
+                    android:textSize="@dimen/default_text_size"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/outer_color_item_bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/inner_color_item_bg"
+                    style="@style/InnerListItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/color_list"
+                        checkedColor="@{configViewModel.challenge}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="40dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:singleLine="true"
+                        app:singleSelection="true">
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/pink_chip"
+                            style="@style/ColorChip"
+                            android:layout_width="90dp"
+                            android:layout_height="80dp"
+                            app:chipBackgroundColor="@color/pinkColor"
+                            tools:checked="true" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/violet_chip"
+                            style="@style/ColorChip"
+                            android:layout_width="90dp"
+                            android:layout_height="80dp"
+                            app:chipBackgroundColor="@color/violetColor"
+                            tools:checked="true" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/blue_chip"
+                            style="@style/ColorChip"
+                            android:layout_width="90dp"
+                            android:layout_height="80dp"
+                            app:chipBackgroundColor="@color/blueColor"
+                            tools:checked="true" />
+                    </com.google.android.material.chip.ChipGroup>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/colorText"
+                    style="@style/Label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:text="Color"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Button
+                android:id="@+id/save_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textSize="@dimen/default_text_size"
+                android:onClick="@{() -> configViewModel.onSave()}"
+                android:text="Save" />
+        </LinearLayout>
+    </ScrollView>
+</layout>

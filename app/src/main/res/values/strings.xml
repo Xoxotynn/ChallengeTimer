@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Challenge Timer</string>
+    <string name="test_label">Bruh</string>
+    <string name="easy_label">Easy</string>
+    <string name="medium_label">Medium</string>
+    <string name="hard_label">Hard</string>
+    <string name="current_difficulty_tooltip">Current difficulty: %1$s\nDays until disappear: %2$d</string>
+
+    <string name="undo_scnackbar_string">Challenge %s deleted!</string>
+    <string name="reset_scnackbar_string">Challenge %s progress reset!</string>
+
+    <string name="last_rank_remaining_string">You successfully complete the challenge!\nCongratz!</string>
+</resources>
