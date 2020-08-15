@@ -1,9 +1,10 @@
 package com.example.challengetimer.timer
 
 import android.app.Application
+import android.app.NotificationManager
 import android.os.CountDownTimer
 import android.text.format.DateUtils
-import android.util.Log
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,7 +12,7 @@ import androidx.lifecycle.Transformations
 import com.example.challengetimer.R
 import com.example.challengetimer.database.Challenge
 import com.example.challengetimer.database.ChallengeDatabaseDao
-import com.example.challengetimer.main.MainViewModel
+import com.example.challengetimer.utils.sendNotification
 import kotlinx.coroutines.*
 import me.tankery.lib.circularseekbar.CircularSeekBar
 import kotlin.math.max
@@ -30,11 +31,14 @@ private const val WEEK_MILLIS = 24 * 3600 * 1000 * 7
 class TimerViewModel(
     private val challengeId: Long,
     val database: ChallengeDatabaseDao,
-    application: Application
-) : AndroidViewModel(application), CircularSeekBar.OnCircularSeekBarChangeListener  {
+    private val app: Application
+) : AndroidViewModel(app), CircularSeekBar.OnCircularSeekBarChangeListener  {
 
     private val viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+
+
+    val notificationManager = ContextCompat.getSystemService(app, NotificationManager::class.java) as NotificationManager
 
     private lateinit var timer: CountDownTimer
 
@@ -59,37 +63,46 @@ class TimerViewModel(
     val infoString = Transformations.map(challenge) {
         var remainingDays = (WEEK_MILLIS * it.difficulty.coerceAtLeast(1)) - (System.currentTimeMillis() - it.startTimeMilli)
         remainingDays = remainingDays.div(WEEK_MILLIS/7) + 1
-        application.applicationContext.getString(R.string.current_difficulty_tooltip, Difficulty.values()[it.difficulty], remainingDays)
+        app.applicationContext.getString(R.string.current_difficulty_tooltip, Difficulty.values()[it.difficulty], remainingDays)
     }
 
     private val _targetTime = MutableLiveData<Int>()
     val targetTime: LiveData<Int>
         get() = _targetTime
 
+    init {
+
+    }
+
     fun setTimer() {
+        var countDownTime: Long
+        currentTime.value?.let {
+            countDownTime = if (challenge.value?.difficulty == 0) 10000L else it.times(1000).toLong()
+            notificationManager.cancelAll()
+            createTimer(countDownTime)
+        }
+    }
+
+    private fun createTimer(time: Long) {
         val target = targetTime.value
         uiScope.launch {
-            currentTime.value?.let {
-                val countDownTime = if (challenge.value?.difficulty == 0) 10000L
-                                    else it.times(1000).toLong()
-
-                timer = object : CountDownTimer(countDownTime, 1000) {
-                    override fun onFinish() {
-                        uiScope.launch {
-                            challenge.value?.let { ch ->
-                                ch.progressMilli += target?.times(1000L)!!
-                                ch.rank = checkRank(ch)
-                                update(ch)
-                            }
+            timer = object : CountDownTimer(time, 1000) {
+                override fun onFinish() {
+                    uiScope.launch {
+                        challenge.value?.let { ch ->
+                            ch.progressMilli += target?.times(1000L)!!
+                            ch.rank = checkRank(ch)
+                            update(ch)
                         }
-                        onCancelTimer()
                     }
+                    onCancelTimer()
+                    notificationManager.sendNotification(challenge.value, app.getString(R.string.timer_finished), app)
+                }
 
-                    override fun onTick(millisUntilFinished: Long) {
-                        _currentTime.value = (millisUntilFinished / 1000).toInt()
-                    }
-                }.start()
-            }
+                override fun onTick(millisUntilFinished: Long) {
+                    _currentTime.value = (millisUntilFinished / 1000).toInt()
+                }
+            }.start()
         }
     }
 

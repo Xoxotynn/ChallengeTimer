@@ -10,4 +10,10 @@
     <string name="reset_scnackbar_string">Challenge %s progress reset!</string>
 
     <string name="last_rank_remaining_string">You successfully complete the challenge!\nCongratz!</string>
+
+    <string name="timer_notification_channel_id" translatable="false">timer_channel</string>
+    <string name="timer_notification_channel_name" translatable="true">Timer</string>
+
+    <string name="notification_title">Timer finished</string>
+    <string name="timer_finished">Good job, bro</string>
 </resources>

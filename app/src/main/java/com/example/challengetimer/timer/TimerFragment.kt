@@ -1,6 +1,10 @@
 package com.example.challengetimer.timer
 
 import android.animation.ObjectAnimator
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -99,6 +103,7 @@ class TimerFragment : Fragment() {
             }
         })
 
+        createChannel(getString(R.string.timer_notification_channel_id), getString(R.string.timer_notification_channel_name))
         return binding.root
     }
 
@@ -134,6 +139,22 @@ class TimerFragment : Fragment() {
             ObjectAnimator.ofFloat(binding.rankImage, "translationY", 0F)
                 .setDuration(500)
                 .start()
+        }
+    }
+
+    private fun createChannel(channelId: String, channelName: String) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val notificationChannel = NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_HIGH)
+                .apply {
+                    setShowBadge(false)
+                }
+            notificationChannel.enableLights(true)
+            notificationChannel.lightColor = Color.WHITE
+            notificationChannel.enableVibration(true)
+            notificationChannel.description = "Timer finished!"
+
+            val notificationManager = requireActivity().getSystemService(NotificationManager::class.java)
+            notificationManager.createNotificationChannel(notificationChannel)
         }
     }
 
