@@ -19,9 +19,11 @@ class ChallengeAdapter(val clickListener: ChallengeListener, val difficulty: Int
     fun submitNewList(list: List<Challenge>?): Boolean {
         var newList: List<Challenge> = listOf()
         list?.let {
-            newList = list.filter { it.difficulty == difficulty }
+            newList = it.filter { ch -> ch.difficulty == difficulty }
         }
-        submitList(newList)
+        if (newList.isNotEmpty())
+            submitList(newList)
+
         return newList.isEmpty()
     }
 

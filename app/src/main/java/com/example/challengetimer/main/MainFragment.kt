@@ -44,14 +44,15 @@ class MainFragment : Fragment() {
         binding.hardList.challengeList.adapter = adaptersList[3]
 
         mainViewModel.challenges.observe(viewLifecycleOwner, Observer {
-            it.let {
-                binding.bruhList.outerItemBg.isGone = adaptersList[0].submitNewList(it)
-                binding.easyList.outerItemBg.isGone = adaptersList[1].submitNewList(it)
-                binding.mediumList.outerItemBg.isGone = adaptersList[2].submitNewList(it)
-                binding.hardList.outerItemBg.isGone = adaptersList[3].submitNewList(it)
+            it?.let { list ->
+                binding.bruhList.outerItemBg.isGone = adaptersList[0].submitNewList(list)
+                binding.easyList.outerItemBg.isGone = adaptersList[1].submitNewList(list)
+                binding.mediumList.outerItemBg.isGone = adaptersList[2].submitNewList(list)
+                binding.hardList.outerItemBg.isGone = adaptersList[3].submitNewList(list)
 
-                binding.emptyTitle.isGone = it.isNotEmpty()
-                binding.createFirstButton.isGone = it.isNotEmpty()
+
+                binding.emptyTitle.isGone = list.isNotEmpty()
+                binding.createFirstButton.isGone = list.isNotEmpty()
 
                 mainViewModel.checkForFailedChallenges()
             }
