@@ -95,12 +95,12 @@
             app:layout_constraintEnd_toEndOf="@+id/timerSeekBar"
             app:layout_constraintStart_toStartOf="@+id/timerSeekBar"
             app:layout_constraintTop_toTopOf="@+id/timerSeekBar"
-            app:layout_constraintVertical_bias="0.33"
+            app:layout_constraintVertical_bias="0.28"
             tools:src="@drawable/rank_diamond_image" />
 
         <TextView
             android:id="@+id/remainingText"
-            android:layout_width="128dp"
+            android:layout_width="132dp"
             android:layout_height="wrap_content"
             remainingTimeText="@{timerViewModel.challenge}"
             android:textAlignment="center"
