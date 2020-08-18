@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
 import androidx.core.app.NotificationCompat
-import androidx.core.content.ContextCompat
 import com.example.challengetimer.MainActivity
 import com.example.challengetimer.R
 import com.example.challengetimer.database.Challenge

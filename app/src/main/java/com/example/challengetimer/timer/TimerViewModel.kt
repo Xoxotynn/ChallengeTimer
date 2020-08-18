@@ -23,10 +23,9 @@ enum class Difficulty {
 
 enum class TimeConst(val time: Int) {
     ZERO_RANK_CONST(30),
-    DIFFICULTY_CONST(150)
+    DIFFICULTY_CONST(150),
+    WEEK_MILLIS(24*3600*1000*7)
 }
-
-private const val WEEK_MILLIS = 24 * 3600 * 1000 * 7
 
 class TimerViewModel(
     private val challengeId: Long,
@@ -61,8 +60,8 @@ class TimerViewModel(
     }
 
     val infoString = Transformations.map(challenge) {
-        var remainingDays = (WEEK_MILLIS * it.difficulty.coerceAtLeast(1)) - (System.currentTimeMillis() - it.startTimeMilli)
-        remainingDays = remainingDays.div(WEEK_MILLIS/7) + 1
+        var remainingDays = (TimeConst.WEEK_MILLIS.time * it.difficulty.coerceAtLeast(1)) - (System.currentTimeMillis() - it.startTimeMilli)
+        remainingDays = remainingDays.div(TimeConst.WEEK_MILLIS.time/7) + 1
         app.applicationContext.getString(R.string.current_difficulty_tooltip, Difficulty.values()[it.difficulty], remainingDays)
     }
 

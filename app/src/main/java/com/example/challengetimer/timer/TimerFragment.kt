@@ -1,5 +1,6 @@
 package com.example.challengetimer.timer
 
+import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -24,6 +25,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.skydoves.balloon.ArrowOrientation
 import com.skydoves.balloon.BalloonAnimation
 import com.skydoves.balloon.createBalloon
+import java.lang.Float.min
 
 class TimerFragment : Fragment() {
 
@@ -94,13 +96,13 @@ class TimerFragment : Fragment() {
         })
 
         timerViewModel.targetTime.observe(viewLifecycleOwner, Observer { time ->
-            if (time != null) {
-                uiTimerListener(true, fab, bottomAppBar, binding.timerSeekBar.progress)
+            val progress = min(binding.timerSeekBar.progress,
+                (timerViewModel.currentTime.value?.div(300)?.minus(1))?.toFloat()!!)
+
+            time?.let {
                 timerViewModel.setTimer()
-            } else {
-                uiTimerListener(false, fab, bottomAppBar,
-                    (timerViewModel.currentTime.value?.div(300)?.minus(1))?.toFloat()!!)
             }
+            uiTimerListener(time != null, fab, bottomAppBar, progress)
         })
 
         createChannel(getString(R.string.timer_notification_channel_id), getString(R.string.timer_notification_channel_name))
@@ -119,27 +121,18 @@ class TimerFragment : Fragment() {
         binding.startTimerButton.isGone = isStarted
         binding.timerSeekBar.pointerStrokeWidth = if (isStarted) 0F else 72F
 
-        if (isStarted) {
-            ObjectAnimator.ofFloat(binding.timerSeekBar, "progress",
-                progress, binding.timerSeekBar.max)
-                .setDuration(500)
-                .start()
 
+        val seekBarAnimator = ObjectAnimator.ofFloat(binding.timerSeekBar, "progress", progress, binding.timerSeekBar.max)
+        val rankImageAnimator = ObjectAnimator.ofFloat(binding.rankImage, "translationY", 0F, 50F)
 
-            ObjectAnimator.ofFloat(binding.rankImage, "translationY", 50F)
-                .setDuration(500)
-                .start()
+        val set = AnimatorSet()
+        set.playTogether(seekBarAnimator, rankImageAnimator)
+        set.duration = 500
 
-        } else {
-            ObjectAnimator.ofFloat(binding.timerSeekBar, "progress",
-                binding.timerSeekBar.max, progress)
-                .setDuration(500)
-                .start()
-
-            ObjectAnimator.ofFloat(binding.rankImage, "translationY", 0F)
-                .setDuration(500)
-                .start()
-        }
+        if (isStarted)
+            set.start()
+        else
+            set.reverse()
     }
 
     private fun createChannel(channelId: String, channelName: String) {
@@ -147,11 +140,11 @@ class TimerFragment : Fragment() {
             val notificationChannel = NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_HIGH)
                 .apply {
                     setShowBadge(false)
+                    enableLights(true)
+                    lightColor = Color.WHITE
+                    enableVibration(true)
+                    description = "Timer finished!"
                 }
-            notificationChannel.enableLights(true)
-            notificationChannel.lightColor = Color.WHITE
-            notificationChannel.enableVibration(true)
-            notificationChannel.description = "Timer finished!"
 
             val notificationManager = requireActivity().getSystemService(NotificationManager::class.java)
             notificationManager.createNotificationChannel(notificationChannel)

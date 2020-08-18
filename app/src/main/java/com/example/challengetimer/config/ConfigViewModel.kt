@@ -1,13 +1,13 @@
 package com.example.challengetimer.config
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.challengetimer.database.Challenge
 import com.example.challengetimer.database.ChallengeDatabaseDao
 import kotlinx.coroutines.*
+import java.util.*
 
 class ConfigViewModel(
     private val challengeId: Long = -1L,

@@ -1,18 +1,12 @@
 package com.example.challengetimer.main
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.view.get
-import androidx.core.view.size
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.challengetimer.R
 import com.example.challengetimer.database.Challenge
 import com.example.challengetimer.databinding.ChallengeItemBinding
-import kotlinx.android.synthetic.main.main_fragment.view.*
-import kotlin.properties.Delegates
 
 class ChallengeAdapter(val clickListener: ChallengeListener, val difficulty: Int = 0) : ListAdapter<Challenge, ChallengeAdapter.ViewHolder>(ChallengeDiffCallback()) {
 

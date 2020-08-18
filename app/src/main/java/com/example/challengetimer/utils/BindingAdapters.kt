@@ -11,7 +11,6 @@ import com.example.challengetimer.database.Challenge
 import com.example.challengetimer.timer.TimeConst
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
-import com.skydoves.balloon.createBalloon
 import me.tankery.lib.circularseekbar.CircularSeekBar
 
 @BindingAdapter("listDifficultyText")

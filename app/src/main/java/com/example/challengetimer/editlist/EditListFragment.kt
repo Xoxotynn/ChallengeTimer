@@ -1,9 +1,6 @@
 package com.example.challengetimer.editlist
 
-import android.content.Context
-import android.icu.lang.UCharacter
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,14 +10,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.challengetimer.R
-import com.example.challengetimer.database.Challenge
 import com.example.challengetimer.database.ChallengeDatabase
 import com.example.challengetimer.databinding.EditListFragmentBinding
-import com.example.challengetimer.main.MainFragmentDirections
 
 class EditListFragment : Fragment() {
 

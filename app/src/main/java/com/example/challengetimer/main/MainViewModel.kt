@@ -1,13 +1,10 @@
 package com.example.challengetimer.main
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.challengetimer.database.Challenge
 import com.example.challengetimer.database.ChallengeDatabaseDao
-import com.skydoves.balloon.createBalloon
 import kotlinx.coroutines.*
 
 private const val WEEK_MILLIS = 24 * 3600 * 1000 * 7

@@ -2,8 +2,6 @@ package com.example.challengetimer.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.example.challengetimer.database.Challenge
-
 
 @Dao
 interface ChallengeDatabaseDao {

@@ -3,7 +3,6 @@ package com.example.challengetimer.main
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.challengetimer.database.ChallengeDatabase
 import com.example.challengetimer.database.ChallengeDatabaseDao
 
 class MainViewModelFactory(
