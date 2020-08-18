@@ -39,7 +39,7 @@ class TimerViewModel(
 
     val notificationManager = ContextCompat.getSystemService(app, NotificationManager::class.java) as NotificationManager
 
-    private lateinit var timer: CountDownTimer
+    private var timer: CountDownTimer? = null
 
     val challenge = database.getChallengeWithId(challengeId)
 
@@ -68,10 +68,6 @@ class TimerViewModel(
     private val _targetTime = MutableLiveData<Int>()
     val targetTime: LiveData<Int>
         get() = _targetTime
-
-    init {
-
-    }
 
     fun setTimer() {
         var countDownTime: Long
@@ -113,7 +109,7 @@ class TimerViewModel(
         _targetTime.value?.let {
             _currentTime.value = it
             _targetTime.value = null
-            timer.cancel()
+            timer?.cancel()
         }
     }
 
@@ -168,5 +164,6 @@ class TimerViewModel(
     override fun onCleared() {
         super.onCleared()
         viewModelJob.cancel()
+        timer?.cancel()
     }
 }

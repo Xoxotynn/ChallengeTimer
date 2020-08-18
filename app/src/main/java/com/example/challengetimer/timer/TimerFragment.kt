@@ -123,7 +123,7 @@ class TimerFragment : Fragment() {
 
 
         val seekBarAnimator = ObjectAnimator.ofFloat(binding.timerSeekBar, "progress", progress, binding.timerSeekBar.max)
-        val rankImageAnimator = ObjectAnimator.ofFloat(binding.rankImage, "translationY", 0F, 50F)
+        val rankImageAnimator = ObjectAnimator.ofFloat(binding.rankImage, "translationY", 0F, 84F)
 
         val set = AnimatorSet()
         set.playTogether(seekBarAnimator, rankImageAnimator)
@@ -155,5 +155,6 @@ class TimerFragment : Fragment() {
         super.onDestroyView()
         listener.getBottomAppBar().isGone = false
         listener.getFab().isGone = false
+
     }
 }
